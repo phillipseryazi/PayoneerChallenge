@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,7 +19,7 @@ import com.mudhut.software.payoneerchallenge.R;
 import com.mudhut.software.payoneerchallenge.adapters.PayOptionsRecyclerAdapter;
 import com.mudhut.software.payoneerchallenge.viewmodels.MainViewModel;
 
-public class PayOptionsFragment extends Fragment {
+public class PayOptionsFragment extends Fragment implements PayOptionsRecyclerAdapter.PaymentOptionListener {
     private MainViewModel viewModel;
     private RecyclerView recyclerView;
     private PayOptionsRecyclerAdapter adapter;
@@ -59,7 +60,7 @@ public class PayOptionsFragment extends Fragment {
 
     private void registerObservers(View view) {
         viewModel.livedataList.observe(getViewLifecycleOwner(), paymentMethods -> {
-            adapter = new PayOptionsRecyclerAdapter(paymentMethods);
+            adapter = new PayOptionsRecyclerAdapter(paymentMethods, this);
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         });
@@ -71,5 +72,10 @@ public class PayOptionsFragment extends Fragment {
                 view.findViewById(R.id.payment_options_progressbar).setVisibility(View.GONE);
             }
         });
+    }
+
+    @Override
+    public void onOptionClick(String label) {
+        Toast.makeText(requireContext(), label + " was clicked!", Toast.LENGTH_SHORT).show();
     }
 }

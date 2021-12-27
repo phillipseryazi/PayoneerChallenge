@@ -1,4 +1,4 @@
-package com.mudhut.software.payoneerchallenge.network.error;
+package com.mudhut.software.payoneerchallenge.network.interceptors;
 
 import java.io.IOException;
 

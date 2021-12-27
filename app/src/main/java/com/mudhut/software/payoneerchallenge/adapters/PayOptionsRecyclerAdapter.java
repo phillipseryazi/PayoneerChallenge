@@ -17,9 +17,11 @@ import java.util.List;
 
 public class PayOptionsRecyclerAdapter extends RecyclerView.Adapter<PayOptionsRecyclerAdapter.PaymentOptionsViewHolder> {
     private final List<ApplicableNetwork> list;
+    private final PaymentOptionListener listener;
 
-    public PayOptionsRecyclerAdapter(List<ApplicableNetwork> list) {
+    public PayOptionsRecyclerAdapter(List<ApplicableNetwork> list, PaymentOptionListener listener) {
         this.list = list;
+        this.listener = listener;
     }
 
     @NonNull
@@ -33,6 +35,9 @@ public class PayOptionsRecyclerAdapter extends RecyclerView.Adapter<PayOptionsRe
     public void onBindViewHolder(@NonNull PaymentOptionsViewHolder holder, int position) {
         holder.getTextView().setText(list.get(position).getLabel());
         Glide.with(holder.itemView).load(list.get(position).getLinks().get("logo")).into(holder.getImageView());
+        holder.itemView.setOnClickListener(view -> {
+            listener.onOptionClick(list.get(position).getLabel());
+        });
     }
 
     @Override
@@ -57,5 +62,10 @@ public class PayOptionsRecyclerAdapter extends RecyclerView.Adapter<PayOptionsRe
         public ImageView getImageView() {
             return imageView;
         }
+
+    }
+
+    public interface PaymentOptionListener {
+        void onOptionClick(String label);
     }
 }

@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.mudhut.software.payoneerchallenge.models.ApplicableNetwork;
 import com.mudhut.software.payoneerchallenge.models.ListResult;
-import com.mudhut.software.payoneerchallenge.network.error.NetworkException;
+import com.mudhut.software.payoneerchallenge.network.interceptors.NetworkException;
 import com.mudhut.software.payoneerchallenge.repositories.MainRepository;
 
 import java.util.List;

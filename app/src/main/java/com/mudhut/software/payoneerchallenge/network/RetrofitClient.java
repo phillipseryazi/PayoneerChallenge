@@ -1,6 +1,6 @@
 package com.mudhut.software.payoneerchallenge.network;
 
-import com.mudhut.software.payoneerchallenge.network.error.ErrorInterceptor;
+import com.mudhut.software.payoneerchallenge.network.interceptors.ErrorInterceptor;
 
 import java.util.concurrent.TimeUnit;
 
